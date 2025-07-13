@@ -1,0 +1,6 @@
+primp
+python-dotenv
+websockets
+# Add fastapi and uvicorn for the API
+fastapi
+uvicorn[standard] 
