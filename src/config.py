@@ -28,7 +28,7 @@ def load_accounts():
                     auth_token = f"{parts[0]}|{parts[1]}"
                     # The rest of the line might contain user:pass info
                     rest = parts[2] if len(parts) > 2 else ""
-                    username = rest.split(':')[0] if ':' in rest else None
+                    username = rest.split(':')[0].strip() if ':' in rest else None
                     accounts.append({"auth_token": auth_token, "username": username})
     except FileNotFoundError:
         print("Warning: accs.txt not found. The bot will not be able to send messages.")

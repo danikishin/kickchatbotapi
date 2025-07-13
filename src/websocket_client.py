@@ -16,7 +16,7 @@ class WebSocketClient:
         self.websocket: WebSocketClientProtocol | None = None
         self.messages = []
         self._last_ping_time = time.time()
-        self.bot_usernames = bot_usernames
+        self.bot_usernames = {username.lower() for username in bot_usernames if username}
         self.ignored_message_count = 0
         self._lock = asyncio.Lock()
 
@@ -68,8 +68,10 @@ class WebSocketClient:
         elif event == "App\\Events\\ChatMessageEvent":
             async with self._lock:
                 sender_username = data.get("sender", {}).get("username")
-                if sender_username in self.bot_usernames:
+                #print(f"Received message from {sender_username}: {data.get('content')}")
+                if sender_username.lower() in self.bot_usernames:
                     self.ignored_message_count += 1
+                    #print(f"Ignored message from {sender_username}")
                     return  # Ignore messages from our own bots
 
                 message_content = {

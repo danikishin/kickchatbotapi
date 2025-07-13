@@ -51,14 +51,14 @@ async def generation_loop(ws_client: websocket_client.WebSocketClient, message_p
         await asyncio.sleep(config.MESSAGE_COLLECTION_SECONDS)
         
         chat_history, ignored_count = await ws_client.get_and_clear_messages()
-        
-        if ignored_count > 0:
-            print(f"({ignored_count} messages from own bots were ignored)")
 
         if not chat_history:
             continue
             
         try:
+            if ignored_count > 0:
+                print(f"({ignored_count} messages from own bots were ignored before sending to LLM)")
+
             # Run the synchronous LLM call in a separate thread to avoid blocking the event loop
             generated_messages = await asyncio.to_thread(
                 llm_generator.generate_messages,
