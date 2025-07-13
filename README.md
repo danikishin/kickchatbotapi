@@ -130,4 +130,8 @@ You can also run the application inside a Docker container.
     - `-p 8000:8000`: Maps port 8000 on your local machine to port 8000 in the container.
     - `--env-file .env`: Loads the environment variables from your `.env` file into the container.
 
-    The API will be accessible at `http://localhost:8000`. 
+    The API will be accessible at `http://localhost:8000`.
+
+### Continuous Integration
+
+This project uses GitHub Actions to automatically build and publish the Docker image to the GitHub Container Registry (`ghcr.io`) every time a change is pushed to the `main` branch. You can find the published packages in the "Packages" section of the GitHub repository. 
