@@ -2,7 +2,7 @@ import asyncio
 from typing import Dict, Any, Optional
 from collections import deque
 
-from . import kick_api
+from . import kick_api, config
 from .main import run_bot # Re-use the run_bot logic
 
 class BotManager:
@@ -103,7 +103,7 @@ class BotManager:
                     print(f"Unexpected error for {channel_name}: {e}. Retrying...")
                     self._bots[channel_name]["status"] = "internal_error"
                 
-                await asyncio.sleep(60)
+                await asyncio.sleep(config.LIVE_CHECK_INTERVAL_SECONDS)
         except asyncio.CancelledError:
             if bot_task and not bot_task.done():
                 bot_task.cancel()

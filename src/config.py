@@ -9,6 +9,7 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 # --- Chatbot Configuration ---
 MESSAGE_COLLECTION_SECONDS = int(os.getenv("MESSAGE_COLLECTION_SECONDS", 30))
+LIVE_CHECK_INTERVAL_SECONDS = int(os.getenv("LIVE_CHECK_INTERVAL_SECONDS", 30))
 
 # --- WebSocket Configuration ---
 KICK_WEBSOCKET_URL = "wss://ws-us2.pusher.com/app/32cbd69e4b950bf97679?protocol=7&client=js&version=8.4.0&flash=false"
