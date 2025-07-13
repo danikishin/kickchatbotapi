@@ -41,7 +41,8 @@ class BotManager:
 
             bot_info["task"].cancel()
             await asyncio.wait([bot_info["task"]])
-            del self._bots[channel_name]
+            # The task cleans itself up from the dict in its `finally` block.
+            # No need to delete it here.
             print(f"Bot manager stopped monitoring for channel: {channel_name}")
             return True
 
